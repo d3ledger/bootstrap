@@ -21,7 +21,7 @@ class D3TestGenesisFactory : GenesisInterface {
 
     private val transactionCreatorId = "notary@notary"
 
-    private val zeroPubKey = "``"
+    private val zeroPubKey = "0000000000000000000000000000000000000000000000000000000000000000"
     override fun getAccountsForConfiguration(peersCount: Int): List<AccountPrototype> {
         val activeAccounts =
             D3TestContext.d3neededAccounts.filter { it.type != AccountType.PASSIVE }
