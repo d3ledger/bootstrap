@@ -19,7 +19,7 @@ pipeline {
                 }
             }
         }
-        stage('Build artifacts') {
+        stage('Upload artifacts') {
             steps {
                 script {
                     dockerTags = ['master': 'latest', 'develop': 'dev']
