@@ -16,14 +16,24 @@ import mu.KLogging
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import org.web3j.crypto.*
-import java.lang.IllegalArgumentException
+import org.web3j.crypto.Keys
+import org.web3j.crypto.Wallet
+import org.web3j.crypto.WalletFile
+import org.web3j.crypto.WalletUtils
 import javax.validation.constraints.NotNull
 
 @RestController
 @RequestMapping("/eth")
 class EthController {
     private val log = KLogging().logger
+
+    private fun createSmartContractDeployHelper(network: EthereumNetworkProperties): DeployHelper {
+        return DeployHelperBuilder(
+            network.ethereumConfig,
+            network.ethPasswords
+        ).setFastTransactionManager()
+            .build()
+    }
 
     @PostMapping("/deploy/D3/masterContract/update")
     fun addPeerToMasterContract(@NotNull @RequestBody request: UpdateMasterContractRequest): ResponseEntity<UpdateMasterContractResponse> {
@@ -43,9 +53,11 @@ class EthController {
                     )
                 }.map { it.ecKeyPair }
 
-                if(ecKeyPairs.isEmpty()){
-                    throw IllegalArgumentException("Provide paths to wallets of notaries, " +
-                            "registered in smart contract for signature creation")
+                if (ecKeyPairs.isEmpty()) {
+                    throw IllegalArgumentException(
+                        "Provide paths to wallets of notaries, " +
+                                "registered in smart contract for signature creation"
+                    )
                 }
 
                 var addResult = true
@@ -204,12 +216,70 @@ class EthController {
         }
     }
 
-    private fun createSmartContractDeployHelper(network: EthereumNetworkProperties): DeployHelper {
-        return DeployHelperBuilder(
-            network.ethereumConfig,
-            network.ethPasswords
-        ).setFastTransactionManager()
-            .build()
+    @PostMapping("/deploy/D3/masterContract/validate")
+    fun validateMasterContract(@NotNull @RequestBody request: ValidationSmartContractRequest): ResponseEntity<ValidationSmartContractResponse> {
+        try {
+            val deployHelper = createSmartContractDeployHelper(request.network)
+            return ResponseEntity.ok(
+                ValidationSmartContractResponse(
+                    request.contractAddress,
+                    deployHelper.loadMasterContract(request.contractAddress).isValid
+                )
+            )
+        } catch (e: Exception) {
+            log.error("Cannot validate Master smart contract", e)
+            return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(ValidationSmartContractResponse(e.javaClass.simpleName, e.message))
+        }
+    }
+
+    @PostMapping("/deploy/D3/relayRegistryContract/validate")
+    fun validateRelayRegistryContract(@NotNull @RequestBody request: ValidationSmartContractRequest): ResponseEntity<ValidationSmartContractResponse> {
+        try {
+            val deployHelper = createSmartContractDeployHelper(request.network)
+            return ResponseEntity.ok(
+                ValidationSmartContractResponse(
+                    request.contractAddress,
+                    deployHelper.loadRelayRegistryContract(request.contractAddress).isValid
+                )
+            )
+        } catch (e: Exception) {
+            log.error("Cannot validate RelayRegistry smart contract", e)
+            return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(ValidationSmartContractResponse(e.javaClass.simpleName, e.message))
+        }
+    }
+
+    @PostMapping("/deploy/D3/relayImplementationContract/validate")
+    fun validateRelayImplementationContract(@NotNull @RequestBody request: ValidationSmartContractRequest): ResponseEntity<ValidationSmartContractResponse> {
+        try {
+            val deployHelper = createSmartContractDeployHelper(request.network)
+            return ResponseEntity.ok(
+                ValidationSmartContractResponse(
+                    request.contractAddress,
+                    deployHelper.loadRelayContract(request.contractAddress).isValid
+                )
+            )
+        } catch (e: Exception) {
+            log.error("Cannot validate RelayImplementation smart contract", e)
+            return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(ValidationSmartContractResponse(e.javaClass.simpleName, e.message))
+        }
+    }
+
+    @PostMapping("deploy/D3/sendEther")
+    fun sendEther(@NotNull @RequestBody request: SendEtherRequest): ResponseEntity<SendEtherResponse> {
+        try {
+            val deployHelper = createSmartContractDeployHelper(request.network)
+            val transactionHash = deployHelper.sendEthereum(request.amount, request.toAddress)
+            return ResponseEntity.ok(
+                SendEtherResponse(transactionHash)
+            )
+        } catch (e: java.lang.Exception) {
+            log.error("Cannot validate RelayImplementation smart contract", e)
+            return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(SendEtherResponse(e.javaClass.simpleName, e.message))
+        }
     }
 
     @GetMapping("/create/wallet")

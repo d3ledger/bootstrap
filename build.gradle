@@ -6,7 +6,7 @@ buildscript {
     ext.springBootVersion = '2.1.3.RELEASE'
     ext.kotlinVersion = '1.3.10'
     ext.notary_version='428c4ae8c6ad99d35efc9b8099fa994fa4613c36'
-    ext.d3EthVersion = '9b302a5fcb211878b9754a426195bba012b630f2'
+    ext.d3EthVersion = '18002c33738b8ee66582fc004b0a571a836a2715'
 
     repositories {
         mavenCentral()

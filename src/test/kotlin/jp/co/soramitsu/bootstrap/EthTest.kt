@@ -21,6 +21,7 @@ import org.springframework.test.web.servlet.MvcResult
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 import java.io.File
+import java.math.BigInteger
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
@@ -210,6 +211,47 @@ class EthTest {
         )
         log.info("DeployResponse: ${result.response.contentAsString}")
         assertNull(respBody.errorCode)
+    }
+
+    @Test
+    @Ignore
+    fun testSendEther() {
+        val file = File(classLoader.getResource("eth/main-net-genesis.key")!!.file)
+
+        val result: MvcResult = mvc
+            .perform(
+                MockMvcRequestBuilders.post("deploy/D3/sendEther").contentType(MediaType.APPLICATION_JSON).content(
+                    mapper.writeValueAsString(
+                        SendEtherRequest(
+                            network = EthereumNetworkProperties(
+                                ethPasswords = EthereumPasswordsImpl(
+                                    credentialsPassword = "joms...",
+                                    nodeLogin = "devel...",
+                                    nodePassword = "emooy..."
+                                ),
+                                ethereumConfig = EthereumConfigImpl(
+                                    url = "https://parity1....",
+                                    credentialsPath = file.absolutePath,
+                                    gasPrice = 10000000000,
+                                    gasLimit = 4500000,
+                                    confirmationPeriod = 20
+                                )
+                            ),
+                            amount = BigInteger.TEN,
+                            toAddress = "0x7d1a4fd3d286e5eb239f7f081481ab5be3517c00"
+                        )
+                    )
+                )
+            )
+            .andExpect(MockMvcResultMatchers.status().isOk)
+            .andReturn()
+        val respBody = mapper.readValue(
+            result.response.contentAsString,
+            SendEtherResponse::class.java
+        )
+
+        assertNull(respBody.errorCode)
+        assertNotNull(respBody.transactionHash)
     }
 
     @Test

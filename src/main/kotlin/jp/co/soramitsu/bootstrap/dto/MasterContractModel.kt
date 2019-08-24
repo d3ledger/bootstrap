@@ -84,3 +84,50 @@ data class DeployMasterContractResponse(
     val contractAddress: String? = null,
     val soraAddress: String? = null
 ) : Conflictable()
+
+/**
+ * Request validation of smart contract
+ */
+data class ValidationSmartContractRequest(
+    @NotNull val network: EthereumNetworkProperties = EthereumNetworkProperties(),
+    @NotNull val contractAddress: String = ""
+)
+
+/**
+ * Response for validation check of smart contract
+ */
+data class ValidationSmartContractResponse(
+    val contractAddress: String? = null,
+    val valid: Boolean? = null
+) : Conflictable() {
+    constructor(errorCode: String? = null, message: String? = null) : this(
+        contractAddress = null,
+        valid = null
+    ) {
+        this.errorCode = errorCode
+        this.message = message
+    }
+}
+
+/**
+ * Request to send Ether to address
+ */
+data class SendEtherRequest(
+    @NotNull val network: EthereumNetworkProperties = EthereumNetworkProperties(),
+    @NotNull val amount: BigInteger = BigInteger.ZERO,
+    @NotNull val toAddress: String = ""
+)
+
+/**
+ * Response for send Ether
+ */
+data class SendEtherResponse(
+    val transactionHash: String? = null
+): Conflictable() {
+    constructor(errorCode: String? = null, message: String? = null) : this(
+        transactionHash = null
+    ) {
+        this.errorCode = errorCode
+        this.message = message
+    }
+}
