@@ -8,6 +8,7 @@ package jp.co.soramitsu.bootstrap.controller
 import com.d3.eth.sidechain.util.DeployHelper
 import com.d3.eth.sidechain.util.DeployHelperBuilder
 import com.d3.eth.sidechain.util.hashToAddAndRemovePeer
+import com.fasterxml.jackson.databind.ObjectMapper
 import jp.co.soramitsu.bootstrap.dto.*
 import jp.co.soramitsu.bootstrap.utils.defaultByteHash
 import jp.co.soramitsu.bootstrap.utils.defaultIrohaHash
@@ -17,8 +18,25 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.web3j.crypto.*
-import java.lang.IllegalArgumentException
+import org.web3j.crypto.CipherException
+import java.io.IOException
 import javax.validation.constraints.NotNull
+
+/**
+ * TODO remove after merge of https://github.com/web3j/web3j/pull/1010
+ * Load credentials from JSON wallet string.
+ * @param password - password to decrypt JSON wallet string
+ * @param content - JSON wallet content string
+ * @return Ethereum credentials
+ * @throws CipherException if the underlying cipher is not available
+ * @throws IOException if a low-level I/O problem (unexpected end-of-input,
+ * network error) occurs
+ */
+@Throws(IOException::class, CipherException::class)
+fun loadJsonCredentials(password: String, content: String): Credentials {
+    val walletFile = ObjectMapper().readValue(content, WalletFile::class.java)
+    return Credentials.create(Wallet.decrypt(password, walletFile))
+}
 
 @RestController
 @RequestMapping("/eth")
@@ -28,9 +46,15 @@ class EthController {
     @PostMapping("/deploy/D3/masterContract/update")
     fun addPeerToMasterContract(@NotNull @RequestBody request: UpdateMasterContractRequest): ResponseEntity<UpdateMasterContractResponse> {
         try {
+            val credentials = loadJsonCredentials(
+                request.network.ethereumCredentials.credentialsPassword,
+                request.network.ethereumCredentials.credentials
+            )
             val deployHelper = DeployHelperBuilder(
                 request.network.ethereumConfig,
-                request.network.ethPasswords
+                request.network.ethereumCredentials.nodeLogin,
+                request.network.ethereumCredentials.nodePassword,
+                credentials
             ).setFastTransactionManager()
                 .build()
             if (request.masterContract.address != null) {
@@ -43,9 +67,11 @@ class EthController {
                     )
                 }.map { it.ecKeyPair }
 
-                if(ecKeyPairs.isEmpty()){
-                    throw IllegalArgumentException("Provide paths to wallets of notaries, " +
-                            "registered in smart contract for signature creation")
+                if (ecKeyPairs.isEmpty()) {
+                    throw IllegalArgumentException(
+                        "Provide paths to wallets of notaries, " +
+                                "registered in smart contract for signature creation"
+                    )
                 }
 
                 var addResult = true
@@ -205,10 +231,17 @@ class EthController {
     }
 
     private fun createSmartContractDeployHelper(network: EthereumNetworkProperties): DeployHelper {
+        val credentials = loadJsonCredentials(
+            network.ethereumCredentials.credentialsPassword,
+            network.ethereumCredentials.credentials
+        )
         return DeployHelperBuilder(
             network.ethereumConfig,
-            network.ethPasswords
-        ).setFastTransactionManager()
+            network.ethereumCredentials.nodeLogin,
+            network.ethereumCredentials.nodePassword,
+            credentials
+        )
+            .setFastTransactionManager()
             .build()
     }
 
