@@ -198,7 +198,8 @@ object D3TestContext {
                 Primitive.RolePermission.can_get_blocks,
                 Primitive.RolePermission.can_set_quorum,
                 Primitive.RolePermission.can_grant_can_set_my_quorum,
-                Primitive.RolePermission.can_grant_can_add_my_signatory
+                Primitive.RolePermission.can_grant_can_add_my_signatory,
+                Primitive.RolePermission.can_get_peers
             )
         )
     }
@@ -239,7 +240,8 @@ object D3TestContext {
                 Primitive.RolePermission.can_set_detail,
                 Primitive.RolePermission.can_set_quorum,
                 Primitive.RolePermission.can_add_signatory,
-                Primitive.RolePermission.can_subtract_asset_qty
+                Primitive.RolePermission.can_subtract_asset_qty,
+                Primitive.RolePermission.can_get_peers
             )
 
         )
