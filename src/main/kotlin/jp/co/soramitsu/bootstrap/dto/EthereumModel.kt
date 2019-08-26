@@ -5,27 +5,33 @@
 
 package jp.co.soramitsu.bootstrap.dto
 
-import com.d3.commons.config.EthereumConfig
-import com.d3.commons.config.EthereumPasswords
+import integration.eth.config.EthereumConfig
 import org.web3j.crypto.WalletFile
 
 data class EthereumNetworkProperties(
-    val ethPasswords: EthereumPasswordsImpl = EthereumPasswordsImpl(),
+    val ethereumCredentials: EthereumCredentials = EthereumCredentials(),
     val ethereumConfig: EthereumConfigImpl = EthereumConfigImpl()
 )
 
-data class EthereumPasswordsImpl(
-    override val credentialsPassword: String = "user",
-    override val nodeLogin: String? = null,
-    override val nodePassword: String? = null
-) : EthereumPasswords
+/**
+ * Credentials for Ethereum network
+ * @param credentials - encrypted ethereum credentials in JSON
+ * @param credentialsPassword - password to decrypt credentials
+ * @param nodeLogin - login to Ethereum node
+ * @param nodePassword - password to Ethereum node
+ */
+data class EthereumCredentials(
+    val credentials: String = "",
+    val credentialsPassword: String = "user",
+    val nodeLogin: String? = null,
+    val nodePassword: String? = null
+)
 
 /**
  * Default parameters are Ropsten testnet parameters
  */
 data class EthereumConfigImpl(
     override val url: String = "http://parity-d3.test.iroha.tech:8545",
-    override val credentialsPath: String = "some\\path\\to\\genesis.key",
     override val gasPrice: Long = 100000000000,
     override val gasLimit: Long = 4500000,
     override val confirmationPeriod: Long = 0

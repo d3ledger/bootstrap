@@ -42,7 +42,8 @@ class EthTest {
     @Test
     @Ignore
     fun testUpdateSmartContractAddPeer() {
-        val file = File(classLoader.getResource("eth/main-net-genesis.key")!!.file)
+        val credentials =
+            File(classLoader.getResource("eth/main-net-genesis.key")!!.file).readText()
 
         val result: MvcResult = mvc
             .perform(
@@ -52,14 +53,14 @@ class EthTest {
                     mapper.writeValueAsString(
                         UpdateMasterContractRequest(
                             network = EthereumNetworkProperties(
-                                ethPasswords = EthereumPasswordsImpl(
+                                ethereumCredentials = EthereumCredentials(
+                                    credentials = credentials,
                                     credentialsPassword = "joms...",
                                     nodeLogin = "devel..",
                                     nodePassword = "emooy..."
                                 ),
                                 ethereumConfig = EthereumConfigImpl(
                                     url = "https://parity1...",
-                                    credentialsPath = file.absolutePath,
                                     gasPrice = 10000000000,
                                     gasLimit = 4500000,
                                     confirmationPeriod = 20
@@ -87,16 +88,17 @@ class EthTest {
     @Test
     @Ignore
     fun testDeployAllInitialContractsByDifferentEndpointsMainNet() {
-        val file = File(classLoader.getResource("eth/main-net-genesis.key")!!.file)
+        val credentials =
+            File(classLoader.getResource("eth/main-net-genesis.key")!!.file).readText()
         val network = EthereumNetworkProperties(
-            ethPasswords = EthereumPasswordsImpl(
+            ethereumCredentials = EthereumCredentials(
+                credentials = credentials,
                 credentialsPassword = "joms...",
                 nodeLogin = "devel...",
                 nodePassword = "emooy..."
             ),
             ethereumConfig = EthereumConfigImpl(
                 url = "https://parity1....",
-                credentialsPath = file.absolutePath,
                 gasPrice = 10000000000,
                 gasLimit = 4500000,
                 confirmationPeriod = 20
@@ -176,7 +178,8 @@ class EthTest {
     @Test
     @Ignore
     fun testDeploySmartContractMainNet() {
-        val file = File(classLoader.getResource("eth/main-net-genesis.key")!!.file)
+        val credentials =
+            File(classLoader.getResource("eth/main-net-genesis.key")!!.file).readText()
 
         val result: MvcResult = mvc
             .perform(
@@ -184,14 +187,14 @@ class EthTest {
                     mapper.writeValueAsString(
                         AllInitialContractsRequest(
                             network = EthereumNetworkProperties(
-                                ethPasswords = EthereumPasswordsImpl(
+                                ethereumCredentials = EthereumCredentials(
+                                    credentials = credentials,
                                     credentialsPassword = "joms...",
                                     nodeLogin = "devel...",
                                     nodePassword = "emooy..."
                                 ),
                                 ethereumConfig = EthereumConfigImpl(
                                     url = "https://parity1....",
-                                    credentialsPath = file.absolutePath,
                                     gasPrice = 10000000000,
                                     gasLimit = 4500000,
                                     confirmationPeriod = 20
