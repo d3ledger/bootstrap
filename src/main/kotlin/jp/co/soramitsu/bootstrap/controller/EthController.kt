@@ -33,7 +33,7 @@ import javax.validation.constraints.NotNull
  * network error) occurs
  */
 @Throws(IOException::class, CipherException::class)
-fun loadJsonCredentials(password: String, content: String): Credentials {
+private fun loadJsonCredentials(password: String, content: String): Credentials {
     val walletFile = ObjectMapper().readValue(content, WalletFile::class.java)
     return Credentials.create(Wallet.decrypt(password, walletFile))
 }
