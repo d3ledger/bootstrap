@@ -5,8 +5,8 @@ buildscript {
     ext.springfoxSwagger2Version = '2.9.2'
     ext.springBootVersion = '2.1.3.RELEASE'
     ext.kotlinVersion = '1.3.10'
-    ext.notary_version='7dc5f678ea0e2450ffc9078ec33fa8f0af6f9016'
-    ext.d3EthVersion = '0b6cf3625db33ccd8e779b3212aca784e884adcf'
+    ext.notary_version = '87d01ab7723f3870730f22934a4b6ee677e37656'
+    ext.d3EthVersion = 'ba7134be3a801eac681c0c25403da16043cd132c'
 
     repositories {
         mavenCentral()
