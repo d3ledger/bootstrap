@@ -109,7 +109,11 @@ object D3TestContext {
         PassiveAccountPrototype("gen_btc_pk_trigger", "notary"),
         AccountPrototype("admin", "notary", listOf("admin")),
         AccountPrototype("exchanger", "notary", listOf("exchange")),
-        AccountPrototype("broadcast", "notary", listOf("broadcast"))
+        AccountPrototype("broadcast", "notary", listOf("broadcast")),
+        PassiveAccountPrototype(
+            "client_accounts",
+            "notary"
+        )
     )
 
     fun createDataCollectorRole(builder: TransactionBuilder) {
