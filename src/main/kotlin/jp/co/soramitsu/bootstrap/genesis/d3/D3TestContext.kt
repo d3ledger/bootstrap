@@ -106,7 +106,10 @@ object D3TestContext {
             "btc_utxo_storage_v2",
             "notary"
         ),
-        PassiveAccountPrototype("gen_btc_pk_trigger", "notary"),
+        PassiveAccountPrototype(
+            "btc_free_addresses_storage",
+            "notary"
+        ),
         AccountPrototype("admin", "notary", listOf("admin")),
         AccountPrototype("exchanger", "notary", listOf("exchange")),
         AccountPrototype("broadcast", "notary", listOf("broadcast")),
