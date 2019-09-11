@@ -186,8 +186,8 @@ class IrohaTest {
 
         //Check type - keyless accounts added
         assertTrue(respBody.contains("notaries"))
-        assertTrue(respBody.contains("gen_btc_pk_trigger"))
         assertTrue(respBody.contains("btc_change_addresses"))
+        assertTrue(respBody.contains("btc_free_addresses_storage"))
         //Check type - ignored accounts is not added
         assertFalse(respBody.contains("registration_service_primary"))
 
@@ -263,8 +263,8 @@ class IrohaTest {
             createAccountDto("btc_withdrawal_service", "notary", peersCount - peersCount / 3),
             createAccountDto("btc_sign_collector", "notary"),
             createAccountDto("btc_change_addresses", "notary"),
+            createAccountDto("btc_free_addresses_storage", "notary"),
             createAccountDto("vacuumer", "notary"),
-            createAccountDto("gen_btc_pk_trigger", "notary"),
             createAccountDto("admin", "notary"),
             createAccountDto("data_collector", "notary"),
             createAccountDto("rmq", "notary", peersCount - peersCount / 3),
