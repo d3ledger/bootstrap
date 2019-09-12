@@ -5,7 +5,7 @@ buildscript {
     ext.springfoxSwagger2Version = '2.9.2'
     ext.springBootVersion = '2.1.3.RELEASE'
     ext.kotlinVersion = '1.3.10'
-    ext.notary_version = 'dc9b932fc458eb3947216756d3272e5c52c327d4'
+    ext.notary_version = '5402b8cbd93b5ed11e84ad940438e1c5585e0a6a'
     ext.d3EthVersion = 'ba7134be3a801eac681c0c25403da16043cd132c'
 
     repositories {
@@ -79,6 +79,8 @@ dependencies {
 
     compile 'io.github.microutils:kotlin-logging:1.4.9'
 
+    implementation 'com.github.hyperledger:iroha-java:6.1.0'
+
     // kotlin related
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.1'
@@ -102,7 +104,10 @@ dependencies {
     implementation "io.springfox:springfox-swagger-ui:$springfoxSwagger2Version"
 
     // Changelog interface
-    compile 'com.github.d3ledger.bootstrap-changelog:changelog-interface:72b15aabbcfaa88176617444ea36a201b0b347b7'
+    compile('com.github.d3ledger.bootstrap-changelog:changelog-interface:72b15aabbcfaa88176617444ea36a201b0b347b7') {
+        exclude group: 'com.github.hyperledger.iroha-java'
+    }
+    compile 'io.grpc:protoc-gen-grpc-java:1.14.0'
 
     //TODO this is very dirty hack. This dependency must be removed after migration to newer version of Spring Boot
     // https://mvnrepository.com/artifact/org.hibernate/hibernate-validator
