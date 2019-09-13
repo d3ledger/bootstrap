@@ -49,10 +49,10 @@ repositories {
 }
 
 mainClassName = "jp.co.soramitsu.bootstrap.BootstrapMain"
-shadowDistZip.classifier = 'shadow'
-shadowDistTar.classifier = 'shadow'
+//shadowDistZip.classifier = 'shadow'
+//shadowDistTar.classifier = 'shadow'
 // name of jar file that the shadowJar plugin generates
-shadowJar.archiveName = 'app.jar'
+//shadowJar.archiveName = 'app.jar'
 
 // sora-plugin configs
 soramitsu {
@@ -66,22 +66,22 @@ soramitsu {
     }
 }
 
-shadowJar {
-    zip64 true
-}
+//shadowJar {
+//    zip64 true
+//}
 
 dependencies {
     compile("com.github.d3ledger.notary:notary-commons:$notary_version")
     implementation("com.github.d3ledger.d3-eth:eth:$d3EthVersion")
 
-    compile 'io.github.microutils:kotlin-logging:1.4.9'
+//    compile 'io.github.microutils:kotlin-logging:1.4.9'
 
     implementation 'com.github.hyperledger:iroha-java:6.1.0'
 
     // kotlin related
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.1'
-    testCompile "org.jetbrains.kotlin:kotlin-test:$kotlinVersion"
+//    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
+//    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.1'
+//    testCompile "org.jetbrains.kotlin:kotlin-test:$kotlinVersion"
 
     //Iroha-java related
     implementation('com.github.hyperledger.iroha-java:testcontainers:6.0.0')
@@ -109,14 +109,14 @@ dependencies {
 
 //    implementation "org.springframework.boot:spring-boot-starter-jetty:$springBootVersion"
 
-    implementation "commons-logging:commons-logging:1.2"
-
-    compile 'com.google.protobuf:protobuf-java-util:3.6.1'
-    compile 'org.bitcoinj:bitcoinj-core:0.14.7'
+//    implementation "commons-logging:commons-logging:1.2"
+//
+//    compile 'com.google.protobuf:protobuf-java-util:3.6.1'
+//    compile 'org.bitcoinj:bitcoinj-core:0.14.7'
 
     //Web3j
-    compile 'org.web3j:crypto:4.1.1'
-    compile 'org.web3j:core:4.1.1'
+//    compile 'org.web3j:crypto:4.1.1'
+//    compile 'org.web3j:core:4.1.1'
 
 //    testCompile "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
 }
