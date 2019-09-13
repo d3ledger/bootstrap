@@ -76,7 +76,7 @@ dependencies {
 
 //    compile 'io.github.microutils:kotlin-logging:1.4.9'
 
-    implementation 'com.github.hyperledger:iroha-java:6.1.0'
+//    implementation 'com.github.hyperledger:iroha-java:6.1.0'
 
     // kotlin related
 //    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
