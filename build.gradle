@@ -72,7 +72,7 @@ soramitsu {
 
 dependencies {
     compile("com.github.d3ledger.notary:notary-commons:$notary_version")
-    implementation("com.github.d3ledger.d3-eth:eth:$d3EthVersion")
+//    implementation("com.github.d3ledger.d3-eth:eth:$d3EthVersion")
 
 //    compile 'io.github.microutils:kotlin-logging:1.4.9'
 
