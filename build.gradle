@@ -72,15 +72,9 @@ shadowJar {
     zip64 true
 }
 
-
 dependencies {
-    compile("com.github.d3ledger.notary:notary-commons:$notary_version") {
-        exclude group: 'com.github.soramitsu.chain-adapter'
-        exclude group: 'io.github.microutils'
-    }
-    implementation("com.github.d3ledger.d3-eth:eth:$d3EthVersion") {
-        exclude group: 'com.github.d3ledger.notary'
-    }
+    compile("com.github.d3ledger.notary:notary-commons:$notary_version")
+    implementation("com.github.d3ledger.d3-eth:eth:$d3EthVersion")
 
     compile 'io.github.microutils:kotlin-logging:1.4.9'
 
@@ -92,9 +86,7 @@ dependencies {
     testCompile "org.jetbrains.kotlin:kotlin-test:$kotlinVersion"
 
     //Iroha-java related
-    implementation('com.github.hyperledger.iroha-java:testcontainers:6.0.0') {
-        exclude group: 'org.slf4j'
-    }
+    implementation('com.github.hyperledger.iroha-java:testcontainers:6.0.0')
 
     //Spring-boot
     implementation("org.springframework.boot:spring-boot-starter:$springBootVersion") {
@@ -109,9 +101,7 @@ dependencies {
     implementation "io.springfox:springfox-swagger-ui:$springfoxSwagger2Version"
 
     // Changelog interface
-    compile('com.github.d3ledger.bootstrap-changelog:changelog-interface:72b15aabbcfaa88176617444ea36a201b0b347b7') {
-        exclude group: 'com.github.hyperledger.iroha-java'
-    }
+    compile('com.github.d3ledger.bootstrap-changelog:changelog-interface:72b15aabbcfaa88176617444ea36a201b0b347b7')
     compile 'io.grpc:protoc-gen-grpc-java:1.14.0'
 
     //TODO this is very dirty hack. This dependency must be removed after migration to newer version of Spring Boot
@@ -131,7 +121,6 @@ dependencies {
     compile 'org.web3j:core:4.1.1'
 
     testCompile "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
-
 }
 
 sourceCompatibility = 1.8
