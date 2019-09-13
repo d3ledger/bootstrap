@@ -87,14 +87,14 @@ dependencies {
     implementation('com.github.hyperledger.iroha-java:testcontainers:6.0.0')
 
     //Spring-boot
-    implementation("org.springframework.boot:spring-boot-starter:$springBootVersion") {
-        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
-    }
-    implementation("org.springframework.boot:spring-boot-starter-web:$springBootVersion") {
-        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
-        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
-        exclude group: 'org.hibernate'
-    }
+//    implementation("org.springframework.boot:spring-boot-starter:$springBootVersion") {
+//        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+//    }
+//    implementation("org.springframework.boot:spring-boot-starter-web:$springBootVersion") {
+//        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
+//        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+//        exclude group: 'org.hibernate'
+//    }
     implementation "io.springfox:springfox-swagger2:$springfoxSwagger2Version"
     implementation "io.springfox:springfox-swagger-ui:$springfoxSwagger2Version"
 
