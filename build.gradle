@@ -11,7 +11,7 @@ buildscript {
     ext.springBootVersion = '2.1.3.RELEASE'
     ext.kotlinVersion = '1.3.10'
     ext.notary_version = '1b1b9fca97958d418e69df6cde339197300c094f'
-    ext.d3EthVersion = 'ba7134be3a801eac681c0c25403da16043cd132c'
+    ext.d3EthVersion = 'ddfe0648852045f14416d9913704aeec13bdeacc'
 
     repositories {
         mavenCentral()
@@ -91,8 +91,8 @@ dependencies {
         exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
         exclude group: 'org.hibernate'
     }
-//    implementation "io.springfox:springfox-swagger2:$springfoxSwagger2Version"
-//    implementation "io.springfox:springfox-swagger-ui:$springfoxSwagger2Version"
+    implementation "io.springfox:springfox-swagger2:$springfoxSwagger2Version"
+    implementation "io.springfox:springfox-swagger-ui:$springfoxSwagger2Version"
 
     // Changelog interface
     implementation('com.github.d3ledger.bootstrap-changelog:changelog-interface:72b15aabbcfaa88176617444ea36a201b0b347b7')
