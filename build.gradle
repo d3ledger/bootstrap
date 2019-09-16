@@ -72,7 +72,7 @@ shadowJar {
 
 dependencies {
     implementation("com.github.d3ledger.notary:notary-commons:$notary_version")
-//    implementation("com.github.d3ledger.d3-eth:eth:$d3EthVersion")
+    implementation("com.github.d3ledger.d3-eth:eth:$d3EthVersion")
 
     // kotlin related
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
@@ -80,7 +80,7 @@ dependencies {
     testImplementation "org.jetbrains.kotlin:kotlin-test:$kotlinVersion"
 
     //Iroha-java related
-//    implementation('com.github.hyperledger.iroha-java:testcontainers:6.1.0')
+    implementation('com.github.hyperledger.iroha-java:testcontainers:6.1.0')
 
     //Spring-boot
     implementation("org.springframework.boot:spring-boot-starter:$springBootVersion") {
@@ -91,8 +91,8 @@ dependencies {
         exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
         exclude group: 'org.hibernate'
     }
-    implementation "io.springfox:springfox-swagger2:$springfoxSwagger2Version"
-    implementation "io.springfox:springfox-swagger-ui:$springfoxSwagger2Version"
+//    implementation "io.springfox:springfox-swagger2:$springfoxSwagger2Version"
+//    implementation "io.springfox:springfox-swagger-ui:$springfoxSwagger2Version"
 
     // Changelog interface
     implementation('com.github.d3ledger.bootstrap-changelog:changelog-interface:72b15aabbcfaa88176617444ea36a201b0b347b7')
@@ -108,7 +108,7 @@ dependencies {
     implementation 'org.bitcoinj:bitcoinj-core:0.14.7'
 
     //Web3j
-//    implementation 'org.web3j:core:4.2.0'
+    implementation 'org.web3j:core:4.2.0'
 
     testImplementation "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
 }
