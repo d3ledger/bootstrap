@@ -10,7 +10,7 @@ buildscript {
     ext.springfoxSwagger2Version = '2.9.2'
     ext.springBootVersion = '2.1.3.RELEASE'
     ext.kotlinVersion = '1.3.10'
-    ext.notary_version = '1b1b9fca97958d418e69df6cde339197300c094f'
+    ext.notary_version = 'ad6cad8534d76b2f4d6bda7e013e1e1c3e4bd156'
     ext.d3EthVersion = 'ddfe0648852045f14416d9913704aeec13bdeacc'
 
     repositories {
@@ -39,6 +39,7 @@ apply plugin: 'kotlin'
 apply plugin: 'application'
 apply plugin: "kotlin-spring" // See https://kotlinlang.org/docs/reference/compiler-plugins.html#kotlin-spring-compiler-plugin
 apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin: 'org.springframework.boot'
 
 repositories {
     mavenCentral()
@@ -116,7 +117,7 @@ dependencies {
 sourceCompatibility = 1.8
 
 wrapper {
-    gradleVersion = 4.10
+    gradleVersion = 5.6
 }
 
 task runBootstrap(type: JavaExec) {

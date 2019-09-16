@@ -5,6 +5,7 @@
 
 package jp.co.soramitsu.bootstrap.controller
 
+import com.d3.eth.sidechain.util.ATTEMPTS_DEFAULT
 import com.d3.eth.sidechain.util.DeployHelper
 import com.d3.eth.sidechain.util.DeployHelperBuilder
 import com.d3.eth.sidechain.util.hashToAddAndRemovePeer
@@ -54,7 +55,8 @@ class EthController {
                 request.network.ethereumConfig,
                 request.network.ethereumCredentials.nodeLogin,
                 request.network.ethereumCredentials.nodePassword,
-                credentials
+                credentials,
+                ATTEMPTS_DEFAULT
             ).setFastTransactionManager()
                 .build()
             if (request.masterContract.address != null) {
@@ -239,7 +241,8 @@ class EthController {
             network.ethereumConfig,
             network.ethereumCredentials.nodeLogin,
             network.ethereumCredentials.nodePassword,
-            credentials
+            credentials,
+            ATTEMPTS_DEFAULT
         )
             .setFastTransactionManager()
             .build()
