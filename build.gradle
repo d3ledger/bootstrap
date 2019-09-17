@@ -10,7 +10,7 @@ buildscript {
     ext.springfoxSwagger2Version = '2.9.2'
     ext.springBootVersion = '2.1.3.RELEASE'
     ext.kotlinVersion = '1.3.10'
-    ext.notary_version = '63c489ce3707119317c25bb52660f86bb46b713d'
+    ext.notary_version = '1a605fee92f53b55d074f87787c2ceca9acec687'
     ext.d3EthVersion = 'ddfe0648852045f14416d9913704aeec13bdeacc'
     ext.changelog_version = '0.0.2'
     ext.iroha_java_version = '6.1.0'
