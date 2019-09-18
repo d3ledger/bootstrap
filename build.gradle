@@ -14,12 +14,15 @@ buildscript {
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.github.jengelman.gradle.plugins:shadow:4.0.1'
     }
 }
 
 plugins {
     id "com.github.dolgopolovwork.testreport" version "1"
 }
+
+apply plugin: 'com.github.johnrengelman.shadow'
 
 testReport {
     testFolders = Arrays.asList("changelog-endpoint/src/integration-test")

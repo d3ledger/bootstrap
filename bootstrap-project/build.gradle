@@ -95,19 +95,11 @@ dependencies {
     // Changelog interface
     implementation("com.github.d3ledger.bootstrap-changelog:changelog-interface:$changelog_version")
 
-    //TODO this is very dirty hack. This dependency must be removed after migration to newer version of Spring Boot
-    // https://mvnrepository.com/artifact/org.hibernate/hibernate-validator
-//        implementation 'org.hibernate:hibernate-validator:6.0.14.Final'
-
-//        implementation "org.springframework.boot:spring-boot-starter-jetty:$springBootVersion"
-
     implementation 'com.google.protobuf:protobuf-java-util:3.6.1'
     implementation 'org.bitcoinj:bitcoinj-core:0.14.7'
 
     //Web3j
     implementation 'org.web3j:core:4.2.0'
-
-//        testImplementation "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
 }
 
 task runBootstrap(type: JavaExec) {
