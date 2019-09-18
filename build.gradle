@@ -33,12 +33,12 @@ buildscript {
 
 plugins {
     id 'jp.co.soramitsu.sora-plugin' version '0.1.2'
+    id 'org.jetbrains.kotlin.jvm' version '1.3.41'
 }
 
 group = 'd3'
 version = '1.0-SNAPSHOT'
 
-apply plugin: 'java'
 apply plugin: 'kotlin'
 apply plugin: 'application'
 apply plugin: "kotlin-spring" // See https://kotlinlang.org/docs/reference/compiler-plugins.html#kotlin-spring-compiler-plugin
@@ -71,9 +71,9 @@ shadowJar {
 repositories {
     mavenCentral()
     // for Ktor
-    jcenter()
-    maven { url = 'https://dl.bintray.com/kotlin/ktor' }
-    maven { url 'https://jitpack.io' }
+//    jcenter()
+//    maven { url = 'https://dl.bintray.com/kotlin/ktor' }
+//    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
