@@ -8,7 +8,7 @@ pipeline {
     agent {
         docker {
             label 'd3-build-agent'
-            image 'openjdk:8-jdk-slim'
+            image 'openjdk:8-jdk-alpine'
             args '-v /var/run/docker.sock:/var/run/docker.sock -v /tmp:/tmp'
         }
     }
@@ -16,7 +16,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    sh "./gradlew clean build --info --debug"
+                    sh "./gradlew build --info"
                 }
             }
         }
