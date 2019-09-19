@@ -4,3 +4,6 @@
  */
 
 rootProject.name = 'bootstrap'
+
+include 'bootstrap-project'
+project(':bootstrap-project').projectDir = 'bootstrap-project' as File
