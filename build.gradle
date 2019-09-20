@@ -18,15 +18,8 @@ buildscript {
     }
 }
 
-plugins {
-    id "com.github.dolgopolovwork.testreport" version "1"
-}
 
 apply plugin: 'com.github.johnrengelman.shadow'
-
-testReport {
-    testFolders = Arrays.asList("changelog-endpoint/src/integration-test")
-}
 
 allprojects {
     apply plugin: 'java'
@@ -56,8 +49,4 @@ allprojects {
     compileTestKotlin {
         kotlinOptions.jvmTarget = "1.8"
     }
-}
-
-project.afterEvaluate {
-    test.finalizedBy(d3TestReport)
 }
