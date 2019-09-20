@@ -25,25 +25,7 @@ hs_err_pid*
 ### Gradle template
 .gradle
 /build/
-/notifications/build
-/notifications/gradle
-/notifications/gradlew
-/notifications/gradlew.bat
-/notifications-integration-test/build/
-/d3testreport/gradle
-/d3testreport/gradlew
-/d3testreport/gradlew.bat
-/d3testreport/build
-/notary-commons/build/
-/notary-iroha-integration-test/build/
-/notary-iroha-integration-test/gradle/
-/notary-iroha-integration-test/gradlew
-/bootstrap/build/
-/notary-registration/build/
-/notary-sora-integration-test/build/
-/exchanger/build/
-/configs/brvs/key*.*
-/configs/brvs/keys/key*.*
+bootstrap-project/build/
 *gradlew.bat
 
 # Ignore Gradle GUI config
@@ -108,12 +90,3 @@ fabric.properties
 
 # Editor-based Rest Client
 .idea/httpRequests
-
-# Chain-adapter files
-deploy/chain-adapter/
-
-# SMTP configs
-configs/smtp.properties
-
-# Push API configs
-configs/push.properties

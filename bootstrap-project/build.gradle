@@ -33,6 +33,7 @@ buildscript {
 }
 
 plugins {
+    id "org.sonarqube" version "2.7.1"
     id "org.jetbrains.kotlin.plugin.spring" version "1.3.21"
     id 'jp.co.soramitsu.sora-plugin' version '0.1.2'
 }
@@ -115,6 +116,17 @@ dependencies {
 task runBootstrap(type: JavaExec) {
     main = mainClassName
     classpath = sourceSets.main.runtimeClasspath
+}
+
+sonarqube {
+    properties {
+        property "sonar.github.repository", "d3ledger/bootstrap"
+        property "sonar.projectKey", "d3:bootstrap"
+        property "sonar.java.binaries", "${project.projectDir}/build/classes"
+        property "sonar.java.libraries", "${project.projectDir}/build/libs"
+        property "sonar.java.test.binaries", "${project.projectDir}/build/test-results/test/binary"
+        property "sonar.exclusions", "**/integration-test/**"
+    }
 }
 
 compileKotlin {
