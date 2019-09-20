@@ -20,6 +20,13 @@ pipeline {
                 }
             }
         }
+        stage('Test') {
+            steps {
+                 script {
+                    sh "./gradlew test --info"
+                 }
+            }
+        }
         stage('Push artifacts') {
             when {
               expression { return (env.GIT_BRANCH in dockerTags || env.TAG_NAME) }

@@ -53,7 +53,7 @@ soramitsu {
     projectGroup = 'd3-deploy'
     docker {
         // docker tag
-        tag = System.getenv("TAG")
+        tag = System.getenv("DOCKER_TAG")
         // jar file that is used in the generated Dockerfile
         jar = new File("build/libs/app.jar")
         // the rest in configured using env variables
@@ -81,25 +81,35 @@ dependencies {
     implementation("com.github.hyperledger.iroha-java:testcontainers:$iroha_java_version")
 
     //Spring-boot
-        implementation("org.springframework.boot:spring-boot-starter:$springBootVersion") {
-            exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
-        }
-        implementation("org.springframework.boot:spring-boot-starter-web:$springBootVersion") {
-            exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
-            exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
-            exclude group: 'org.hibernate'
-        }
-        implementation "io.springfox:springfox-swagger2:$springfoxSwagger2Version"
-        implementation "io.springfox:springfox-swagger-ui:$springfoxSwagger2Version"
+    implementation("org.springframework.boot:spring-boot-starter:$springBootVersion") {
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+    }
+    implementation("org.springframework.boot:spring-boot-starter-web:$springBootVersion") {
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+        exclude group: 'org.hibernate'
+    }
+    implementation "io.springfox:springfox-swagger2:$springfoxSwagger2Version"
+    implementation "io.springfox:springfox-swagger-ui:$springfoxSwagger2Version"
 
     // Changelog interface
     implementation("com.github.d3ledger.bootstrap-changelog:changelog-interface:$changelog_version")
 
+    implementation("org.springframework.boot:spring-boot-starter-jetty:$springBootVersion") {
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+    }
+
     implementation 'com.google.protobuf:protobuf-java-util:3.6.1'
+
     implementation 'org.bitcoinj:bitcoinj-core:0.14.7'
 
     //Web3j
     implementation 'org.web3j:core:4.2.0'
+
+    testImplementation("org.springframework.boot:spring-boot-starter-test:$springBootVersion") {
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+    }
+    testImplementation("org.apache.httpcomponents:httpclient:4.5.3")
 }
 
 task runBootstrap(type: JavaExec) {
