@@ -184,9 +184,8 @@ object D3TestContext {
         builder.createRole(
             "consensus_collector",
             listOf(
-                Primitive.RolePermission.can_create_account,
                 Primitive.RolePermission.can_set_detail,
-                Primitive.RolePermission.can_get_all_accounts
+                Primitive.RolePermission.can_get_all_acc_detail
             )
         )
     }
